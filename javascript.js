@@ -1,52 +1,90 @@
-function getComputerChoice() {
-    const choices = ['Rock', 'Paper', 'Scissors'];
-    const randomIndex = Math.floor(Math.random() * choices.length);
-    return choices[randomIndex];
-}
+// Wrap your code in a window load event listener
+window.addEventListener('load', () => {
+    // Get elements from the DOM
+    const rockButton = document.getElementById("rock");
+    const paperButton = document.getElementById("paper");
+    const scissorsButton = document.getElementById("scissors");
+    const resultMessage = document.getElementById("result-message");
+    const playerScoreDisplay = document.getElementById("player-score");
+    const computerScoreDisplay = document.getElementById("computer-score");
+    const resetButton = document.getElementById("reset");
 
-function playRound(playerSelection, computerSelection) {
-    // Convert playerSelection to lowercase for case-insensitivity
-    const playerChoice = playerSelection.toLowerCase();
-    
-    if (playerChoice === computerSelection.toLowerCase()) {
-        return "It's a tie!";
-    } else if (
-        (playerChoice === 'rock' && computerSelection.toLowerCase() === 'scissors') ||
-        (playerChoice === 'paper' && computerSelection.toLowerCase() === 'rock') ||
-        (playerChoice === 'scissors' && computerSelection.toLowerCase() === 'paper')
-    ) {
-        return `You Win! ${playerChoice.charAt(0).toUpperCase() + playerChoice.slice(1)} beats ${computerSelection}`;
-    } else {
-        return `You Lose! ${computerSelection.charAt(0).toUpperCase() + computerSelection.slice(1)} beats ${playerChoice}`;
-    }
-}
-
-function game() {
+    // Initialize scores
     let playerScore = 0;
     let computerScore = 0;
 
-    for (let round = 1; round <= 5; round++) {
-        const playerSelection = prompt(`Round ${round}: Enter your choice (Rock/Paper/Scissors):`);
-        const computerSelection = getComputerChoice(); // Assuming you've defined the getComputerChoice function
+    // Function to play a round
+    function playRound(playerSelection) {
+        const choices = ['Rock', 'Paper', 'Scissors'];
+        const computerSelection = choices[Math.floor(Math.random() * choices.length)];
 
-        const result = playRound(playerSelection, computerSelection);
-        console.log(result);
-
-        if (result.includes('Win')) {
+        if (playerSelection === computerSelection) {
+            return "It's a tie!";
+        } else if (
+            (playerSelection === 'Rock' && computerSelection === 'Scissors') ||
+            (playerSelection === 'Paper' && computerSelection === 'Rock') ||
+            (playerSelection === 'Scissors' && computerSelection === 'Paper')
+        ) {
             playerScore++;
-        } else if (result.includes('Lose')) {
+            return `You Win! ${playerSelection} beats ${computerSelection}`;
+        } else {
             computerScore++;
+            return `You Lose! ${computerSelection} beats ${playerSelection}`;
         }
     }
 
-    if (playerScore > computerScore) {
-        console.log(`You win the game! Your score: ${playerScore}, Computer's score: ${computerScore}`);
-    } else if (computerScore > playerScore) {
-        console.log(`You lose the game. Your score: ${playerScore}, Computer's score: ${computerScore}`);
-    } else {
-        console.log("It's a tie! The game is a draw.");
-    }
-}
+    // Function to update the UI
+    function updateUI(result) {
+        resultMessage.textContent = result;
+        playerScoreDisplay.textContent = `Player: ${playerScore}`;
+        computerScoreDisplay.textContent = `Computer: ${computerScore}`;
 
-// Call the game function to start playing
-game();
+        if (playerScore >= 5 || computerScore >= 5) {
+            endGame();
+        }
+    }
+
+    // Function to handle button clicks
+    function handleChoiceClick(choice) {
+        const result = playRound(choice);
+        updateUI(result);
+    }
+
+    // Function to end the game
+    function endGame() {
+        rockButton.disabled = true;
+        paperButton.disabled = true;
+        scissorsButton.disabled = true;
+
+        if (playerScore > computerScore) {
+            resultMessage.textContent = "You win the game!";
+        } else if (computerScore > playerScore) {
+            resultMessage.textContent = "You lose the game.";
+        } else {
+            resultMessage.textContent = "It's a tie! The game is a draw.";
+        }
+
+        resetButton.style.display = "block";
+    }
+
+    // Event listeners for button clicks
+    rockButton.addEventListener("click", () => handleChoiceClick("Rock"));
+    paperButton.addEventListener("click", () => handleChoiceClick("Paper"));
+    scissorsButton.addEventListener("click", () => handleChoiceClick("Scissors"));
+
+    // Event listener for reset button
+    resetButton.addEventListener("click", () => {
+        playerScore = 0;
+        computerScore = 0;
+        resultMessage.textContent = "Choose your move!";
+        playerScoreDisplay.textContent = "Player: 0";
+        computerScoreDisplay.textContent = "Computer: 0";
+        rockButton.disabled = false;
+        paperButton.disabled = false;
+        scissorsButton.disabled = false;
+        resetButton.style.display = "none";
+    });
+
+    // Reset UI at the beginning
+    resetButton.dispatchEvent(new Event('click'));
+});

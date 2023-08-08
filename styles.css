@@ -8,8 +8,8 @@
 /* Body styling */
 body {
     font-family: 'Helvetica Neue', sans-serif;
-    background-color: #2C3E50;
-    color: #ECF0F1;
+    background-color: #F2F2F2;
+    color: #333;
 }
 
 /* Header styling */
@@ -34,24 +34,27 @@ main {
 
 .choices {
     display: flex;
-    gap: 2rem;
+    flex-direction: column;
+    gap: 1.5rem;
     margin-bottom: 3rem;
 }
 
 .choices button {
-    background-color: transparent;
-    border: 2px solid #ECF0F1;
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    font-size: 0;
-    color: #ECF0F1;
+    background-color: #FDFDFD;
+    border: 2px solid #DDD;
+    border-radius: 10px;
+    width: 200px;
+    height: 50px;
+    font-size: 1rem;
+    color: #555;
     cursor: pointer;
-    transition: border-color 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .choices button:hover {
-    border-color: #3498DB;
+    background-color: #EAEAEA;
+    border-color: #AAA;
+    transform: scale(1.05);
 }
 
 .result {
@@ -62,19 +65,20 @@ main {
 #result-message {
     font-size: 1.8rem;
     font-weight: bold;
+    color: #444;
 }
 
 .score {
     text-align: center;
     font-size: 1.5rem;
     margin-bottom: 3rem;
+    color: #555;
 }
 
-.score p {
+#player-score, #computer-score {
     margin: 0.5rem 0;
 }
 
-/* Reset button styling */
 #reset {
     background-color: #E74C3C;
     color: #ECF0F1;
@@ -90,7 +94,6 @@ main {
     background-color: #C0392B;
 }
 
-/* Footer styling */
 footer {
     text-align: center;
     padding: 1.5rem 0;
