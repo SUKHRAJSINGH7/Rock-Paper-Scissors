@@ -1,0 +1,119 @@
+/* Reset default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    font-family: 'Helvetica Neue', sans-serif;
+    background-color: #2C3E50;
+    color: #ECF0F1;
+}
+
+/* Header styling */
+header {
+    text-align: center;
+    padding: 2rem 0;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Main content styling */
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+}
+
+.choices {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.choices button {
+    background-color: transparent;
+    border: 2px solid #ECF0F1;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    font-size: 0;
+    color: #ECF0F1;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+.choices button:hover {
+    border-color: #3498DB;
+}
+
+.result {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+#result-message {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.score {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.score p {
+    margin: 0.5rem 0;
+}
+
+/* Reset button styling */
+#reset {
+    background-color: #E74C3C;
+    color: #ECF0F1;
+    border: none;
+    border-radius: 5px;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#reset:hover {
+    background-color: #C0392B;
+}
+
+/* Footer styling */
+footer {
+    text-align: center;
+    padding: 1.5rem 0;
+    background-color: #34495E;
+    color: #ECF0F1;
+}
+
+footer p {
+    font-size: 0.8rem;
+}
+
+/* Media queries for responsiveness */
+@media screen and (max-width: 768px) {
+    .choices {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .result, .score {
+        margin-bottom: 2rem;
+    }
+
+    #reset {
+        padding: 1rem 2rem;
+    }
+}
